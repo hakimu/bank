@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<% @user.accounts.each do |account| %>
+  <p>
+    <strong>Account Type:</strong>
+    <%= account.description %>
+  </p>
+  <p>
+    <strong>Balance:</strong>
+    <%= account.balance %>
+  </p>
+  <p>
+    <strong>Transactions:</strong>
+    <% account.transactions.each do |a| %>
+    <%= a.action %>
+    <% end %>
+  </p>
+<% end %>
+
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
