@@ -28,7 +28,7 @@ RSpec.describe Transaction, type: :model do
   end
   describe '#credit' do
 	  let(:account) { create(:account) }
-		let(:transaction) { create(:transaction, account_id: account.id) }
+	  let(:transaction) { create(:transaction, account_id: account.id) }
     it 'can properly deposit/credit one transaction for an acccount' do
       transaction.credit(500)
       expect(transaction.account.balance.to_f).to eq(500.0)
@@ -41,7 +41,7 @@ RSpec.describe Transaction, type: :model do
   end
   describe '#debit' do
 	  let(:account) { create(:account) }
-		let(:transaction) { create(:transaction, account_id: account.id) }
+	  let(:transaction) { create(:transaction, account_id: account.id) }
     it 'can properly withdrawl/debit one transaction for an account' do
       transaction.debit(500)
       expect(transaction.account.balance.to_f).to eq(-500.0)
