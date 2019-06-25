@@ -26,4 +26,12 @@ RSpec.describe Transaction, type: :model do
       end
     end
   end
+  describe '#credit' do
+    it 'can properly deposit/credit an acccount' do
+      account = create(:account)
+      transaction = create(:transaction, account_id: account.id)
+      transaction.credit(500)
+      expect(transaction.account.balance.to_f).to eq(500.0)
+    end
+  end
 end
