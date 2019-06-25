@@ -3,7 +3,11 @@ class Transaction < ApplicationRecord
   validates :account, presence: true
   validates :action, presence: true, inclusion: { in: %w(credit debit) }
 
-  def deposit(amount)
+  def credit(amount)
     self.account.balance += amount
+  end
+
+  def debit(amount)
+    self.account.balance -= amount
   end
 end

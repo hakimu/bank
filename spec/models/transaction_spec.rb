@@ -19,5 +19,11 @@ RSpec.describe Transaction, type: :model do
         expect(transaction.errors.full_messages).to include('Account can\'t be blank')
       end
     end
+    context 'when given valid attributes' do
+      it 'creates a valid transaction' do
+        transaction = build(:transaction)
+        expect { transaction.save }.to change { Transaction.count }.by(1)
+      end
+    end
   end
 end
