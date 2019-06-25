@@ -27,11 +27,29 @@ RSpec.describe Transaction, type: :model do
     end
   end
   describe '#credit' do
-    it 'can properly deposit/credit an acccount' do
-      account = create(:account)
-      transaction = create(:transaction, account_id: account.id)
+	  let(:account) { create(:account) }
+		let(:transaction) { create(:transaction, account_id: account.id) }
+    it 'can properly deposit/credit one transaction for an acccount' do
       transaction.credit(500)
       expect(transaction.account.balance.to_f).to eq(500.0)
+    end
+    it 'can properly handle multiple transactions' do
+      transaction.credit(500)
+      transaction.credit(500)
+      expect(transaction.account.balance.to_f).to eq(1000.0)
+    end
+  end
+  describe '#debit' do
+	  let(:account) { create(:account) }
+		let(:transaction) { create(:transaction, account_id: account.id) }
+    it 'can properly withdrawl/debit one transaction for an account' do
+      transaction.debit(500)
+      expect(transaction.account.balance.to_f).to eq(-500.0)
+    end
+    it 'can properly handle multiple transactions' do
+      transaction.debit(500)
+      transaction.debit(500)
+      expect(transaction.account.balance.to_f).to eq(-1000.0)
     end
   end
 end
